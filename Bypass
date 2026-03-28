@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria Futurista</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: #00ff9f;
+      font-family: 'Courier New', monospace;
+    }header {
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid #00ff9f;
+}
+
+h1 {
+  text-shadow: 0 0 10px #00ff9f;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+  padding: 20px;
+}
+
+.item {
+  border: 1px solid #00ff9f;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.item:hover {
+  box-shadow: 0 0 15px #00ff9f;
+}
+
+img, video {
+  width: 100%;
+  display: block;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid #00ff9f;
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+/* Tela preta de proteção */
+#blackout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: none;
+  z-index: 9999;
+}
+
+  </style>
+</head>
+<body><div id="blackout"></div><header>
+  <h1>ACCESS SYSTEM</h1>
+  <p>Galeria restrita</p>
+</header><div class="grid">
+  <div class="item">
+    <img src="foto1.jpg" alt="Foto">
+  </div>  <div class="item">
+    <video controls>
+      <source src="video1.mp4" type="video/mp4">
+    </video>
+  </div>
+</div><footer>
+  © Anonymous 2021 - Todos os direitos reservados
+</footer><script>
+  // Bloquear clique direito
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Detectar teclas comuns de print
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'PrintScreen') {
+      blackoutScreen();
+    }
+
+    if (e.ctrlKey && (e.key === 's' || e.key === 'u')) {
+      e.preventDefault();
+      blackoutScreen();
+    }
+  });
+
+  function blackoutScreen() {
+    const blackout = document.getElementById('blackout');
+    blackout.style.display = 'block';
+
+    setTimeout(() => {
+      blackout.style.display = 'none';
+    }, 2000);
+  }
+
+  // Aviso ao trocar de aba (simula proteção)
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      blackoutScreen();
+    }
+  });
+</script></body>
+</html>
